@@ -145,8 +145,6 @@ vim.api.nvim_set_keymap('n', '<leader>sp', [[<cmd>lua require('telescope.builtin
 vim.api.nvim_set_keymap('n', '<leader>so', [[<cmd>lua require('telescope.builtin').tags{ only_current_buffer = true }<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>?', [[<cmd>lua require('telescope.builtin').oldfiles()<CR>]], { noremap = true, silent = true })
 
-vim.api.nvim_set_keymap('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', { noremap = true, silent = true })
-
 -- LSP settings
 local lspconfig = require 'lspconfig'
 local on_attach = function(_, bufnr)
@@ -308,11 +306,14 @@ capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 -- nvim-lsp-installer setup
 local lsp_installer = require("nvim-lsp-installer")
 
+-- This code was copied from nvim-lsp-installer readme, with L313-316 changed to add the on_attach and capabilities functions defined from kickstart.nvim
 -- Register a handler that will be called for each installed server when it's ready (i.e. when installation is finished
 -- or if the server is already installed).
 lsp_installer.on_server_ready(function(server)
-    local opts = {}
-
+    local opts = {
+      on_attach = on_attach, -- this will call the on_attach function defined on L150 that registers all the keybindings defined to interact with the LSP 
+      capabilities = capabilities, -- calls the capabilities function defined on line 302, but tbh no idea what this does
+	  } 
     -- (optional) Customize the options passed to the server
     -- if server.name == "tsserver" then
     --     opts.root_dir = function() ... end
