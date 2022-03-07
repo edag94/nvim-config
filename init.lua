@@ -34,7 +34,9 @@ require('packer').startup(function(use)
   use "hrsh7th/cmp-cmdline" -- cmdline completions
   --[[ use "saadparwaiz1/cmp_luasnip" -- snippet completions ]]
   use 'hrsh7th/cmp-nvim-lsp' -- Feeds nvim-cmp, which needs a source for completions, nvim's LSP as input.
-  use 'L3MON4D3/LuaSnip'
+  use 'L3MON4D3/LuaSnip' -- Snippet engine.
+  use 'rafamadriz/friendly-snippets' -- Has snippet templates for a bunch of different languages.
+  use 'saadparwaiz1/cmp_luasnip' -- Feeds nvim-cmp with the snippets.
 end)
 
 --Set highlight on search
@@ -256,6 +258,7 @@ cmp.setup {
       vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
       -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
       vim_item.menu = ({
+        nvim_lsp = "[LSP]",
         luasnip = "[Snippet]",
         buffer = "[Buffer]",
         path = "[Path]",
@@ -264,6 +267,7 @@ cmp.setup {
     end,
   },
   sources = {
+    { name = "nvim_lsp" },
     { name = "luasnip" },
     { name = "buffer" },
     { name = "path" },
