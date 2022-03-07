@@ -13,30 +13,37 @@ vim.cmd [[
 ]]
 
 require('packer').startup(function(use)
+  -- Package management.
   use 'wbthomason/packer.nvim' -- Package manager
+  -- Theme and visual enhancements.
+  use 'mjlbach/onedark.nvim' -- Theme inspired by Atom
+  use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines, aka the vertical lines that show what level of indentation you are on.
+  -- Git integration.
   use 'tpope/vim-fugitive' -- Git commands in nvim
   use 'tpope/vim-rhubarb' -- Fugitive-companion to interact with github
+  use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } } -- shows what was added/removed in git, on the left hand side behind the line numbers.
+  -- Commenting.
   use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
-  -- UI to select things (files, grep results, open buffers...)
+  -- Fuzzy finder.
   use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } }
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
-  use 'mjlbach/onedark.nvim' -- Theme inspired by Atom
-  
-  use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines, aka the vertical lines that show what level of indentation you are on.
-  use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } } -- shows what was added/removed in git, on the left hand side behind the line numbers.
+  -- Code Completion.
+  ---- LSP.
   use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
   use 'williamboman/nvim-lsp-installer' -- plugin that installs and manages lsp servers for you so you don't have to figure out how to install and set them up locally to integrate with nvim.
-  use 'TovarishFin/vim-solidity' -- Solidity syntax highlighting.
-  -- cmp plugins
+  ---- Completion plugins.
   use "hrsh7th/nvim-cmp" -- The completion plugin
   use "hrsh7th/cmp-buffer" -- buffer completions
   use "hrsh7th/cmp-path" -- path completions
   use "hrsh7th/cmp-cmdline" -- cmdline completions
-  --[[ use "saadparwaiz1/cmp_luasnip" -- snippet completions ]]
   use 'hrsh7th/cmp-nvim-lsp' -- Feeds nvim-cmp, which needs a source for completions, nvim's LSP as input.
+  ---- Snippets.
   use 'L3MON4D3/LuaSnip' -- Snippet engine.
-  use 'rafamadriz/friendly-snippets' -- Has snippet templates for a bunch of different languages.
   use 'saadparwaiz1/cmp_luasnip' -- Feeds nvim-cmp with the snippets.
+  use 'rafamadriz/friendly-snippets' -- Has snippet templates for a bunch of different languages.
+  --
+  -- Solidity.
+  use 'TovarishFin/vim-solidity' -- Solidity syntax highlighting.
 end)
 
 --Set highlight on search
