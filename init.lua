@@ -44,8 +44,14 @@ require('packer').startup(function(use)
   --
   -- Solidity.
   use 'TovarishFin/vim-solidity' -- Solidity syntax highlighting.
+  -- Typescript.
+  use 'leafgarland/typescript-vim' 
 end)
 
+vim.opt.expandtab = true                  -- Use spaces instead of tabs
+vim.opt.shiftwidth = 4                    -- Shift 4 spaces when tab
+vim.opt.tabstop = 4                       -- 1 tab == 4 spaces
+vim.opt.smartindent = true                -- Autoindent new lines
 --Set highlight on search
 vim.o.hlsearch = false
 
@@ -138,6 +144,8 @@ vim.api.nvim_set_keymap('n', '<leader>sd', [[<cmd>lua require('telescope.builtin
 vim.api.nvim_set_keymap('n', '<leader>sp', [[<cmd>lua require('telescope.builtin').live_grep()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>so', [[<cmd>lua require('telescope.builtin').tags{ only_current_buffer = true }<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>?', [[<cmd>lua require('telescope.builtin').oldfiles()<CR>]], { noremap = true, silent = true })
+
+vim.api.nvim_set_keymap('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', { noremap = true, silent = true })
 
 -- LSP settings
 local lspconfig = require 'lspconfig'
