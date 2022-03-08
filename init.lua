@@ -1,3 +1,7 @@
+-- Most of this is initially based of kickstart.nvim, with additional plugins/code added from watching Neovim-from-scratch from chris@machine, and my own learnings along the way.
+-- Feel free to look at the git history to see how this has evolved over time as I got comfortable with nvim config and reading others configs. 
+
+
 -- Install packer
 local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
 
@@ -46,6 +50,8 @@ require('packer').startup(function(use)
   use 'TovarishFin/vim-solidity' -- Solidity syntax highlighting.
   -- Typescript.
   use 'leafgarland/typescript-vim' 
+  -- Directory explorer.
+  use 'tpope/vim-vinegar' -- I like this over NERD tree due to reasons explained in this article: http://vimcasts.org/blog/2013/01/oil-and-vinegar-split-windows-and-project-drawer/
 end)
 
 vim.opt.expandtab = true                  -- Use spaces instead of tabs
